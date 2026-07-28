@@ -4,54 +4,180 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Concert Timer — Privacy Policy</title>
+<meta name="description" content="Concert Timer collects no data. Every concert, program and timing stays on your iPhone. No accounts, no analytics, no third parties.">
+<link rel="canonical" href="https://concerttimerapp.github.io/privacy.html">
+<link rel="icon" href="img/icon.png">
 <style>
-  :root { --red: #e30a14; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 0;
-    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #000; background: #fff; line-height: 1.5;
+  /* Same system as the front page: black, white, one red, Helvetica,
+     flush left, square corners. A legal page, set like a document. */
+
+  :root {
+    --ink: #000;
+    --red: #E30A14;
+    --rule: #d8d8d8;
+    --gap: 24px;
   }
-  .bar { height: 8px; background: var(--red); }
-  main { max-width: 640px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1 { font-weight: 800; font-size: 32px; letter-spacing: -0.5px; margin: 32px 0 8px; }
-  h2 { font-weight: 700; font-size: 19px; margin: 32px 0 8px; }
-  p, li { font-size: 17px; }
-  a { color: var(--red); }
-  .date { color: #666; font-size: 14px; }
-  footer { margin-top: 56px; font-size: 14px; color: #666; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: #fff;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .rule-top { height: 10px; background: var(--red); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gap); }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
+
+  header { padding: 56px 0 36px; }
+  h1 {
+    font-size: clamp(38px, 6.4vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .date {
+    grid-column: 1 / 8;
+    margin: 22px 0 0;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .hr { border: 0; border-top: 1px solid var(--ink); margin: 0; }
+
+  .lede {
+    padding: 44px 0 8px;
+    font-size: clamp(20px, 2.4vw, 27px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    max-width: 22em;
+  }
+
+  section { padding: 34px 0 0; }
+  .kicker {
+    grid-column: 1 / 3;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-top: 4px;
+  }
+  .body { grid-column: 3 / 10; }
+  h2 {
+    font-size: 21px;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  p { margin: 0 0 14px; max-width: 34em; }
+  p:last-child { margin-bottom: 0; }
+
+  footer {
+    margin-top: 52px;
+    padding: 24px 0 64px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: #555;
+  }
+
+  @media (max-width: 800px) {
+    :root { --gap: 18px; }
+    body { font-size: 16px; }
+    header { padding: 36px 0 24px; }
+    .date, .kicker, .body { grid-column: 1 / 13; }
+    .kicker { padding-top: 0; margin-bottom: -12px; }
+    section { padding-top: 26px; }
+  }
 </style>
 </head>
 <body>
-<div class="bar"></div>
-<main>
-  <h1>Privacy Policy</h1>
-  <p class="date">Concert Timer · Last updated June 2026</p>
 
-  <p><strong>Concert Timer does not collect, store, transmit, or share any
-  personal data.</strong></p>
+<div class="rule-top"></div>
 
-  <h2>Your data stays on your device</h2>
-  <p>Every concert, program, timing, and setting you create lives only on your
-  iPhone. None of it is sent to me, to Apple, or to anyone else. There are no
-  accounts, no sign-in, and no tracking.</p>
+<div class="wrap">
 
-  <h2>No analytics, no third parties</h2>
-  <p>The app contains no advertising, no analytics frameworks, and no
-  third-party services that could gather information about you.</p>
+  <header>
+    <h1>Privacy<br>Policy</h1>
+    <div class="grid">
+      <p class="date">Concert Timer · Last updated July 2026</p>
+    </div>
+  </header>
 
-  <h2>Sharing a PDF</h2>
-  <p>When you choose to export a concert as a PDF and share it, that file goes
-  only where you send it, using your device's own share sheet. Concert Timer
-  plays no part beyond creating the file.</p>
+  <hr class="hr">
 
-  <h2>Contact</h2>
-  <p>If you have any questions about this policy, write to
-  <a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a>.</p>
+  <p class="lede">
+    Concert Timer does not collect, store, transmit, or share any personal data.
+  </p>
+
+  <section>
+    <div class="grid">
+      <p class="kicker">01</p>
+      <div class="body">
+        <h2>Your data stays on your device</h2>
+        <p>
+          Every concert, program, timing and setting you create lives only on
+          your iPhone. None of it is sent to me, to Apple, or to anyone else.
+          There are no accounts, no sign-in, and no tracking.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid">
+      <p class="kicker">02</p>
+      <div class="body">
+        <h2>No analytics, no third parties</h2>
+        <p>
+          The app contains no advertising, no analytics frameworks, and no
+          third-party services that could gather information about you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid">
+      <p class="kicker">03</p>
+      <div class="body">
+        <h2>Sharing a PDF or a program</h2>
+        <p>
+          When you export a concert as a PDF, or share a program with a
+          colleague, that file goes only where you send it, using your device's
+          own share sheet. Concert Timer plays no part beyond creating the file.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid">
+      <p class="kicker">04</p>
+      <div class="body">
+        <h2>Contact</h2>
+        <p>
+          If you have any questions about this policy, write to
+          <a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <a href="index.html">← Back to Concert Timer</a>
   </footer>
-</main>
+
+</div>
+
 </body>
 </html>

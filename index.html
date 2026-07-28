@@ -3,49 +3,389 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Concert Timer — Support</title>
+<title>Concert Timer — timing app for orchestra librarians</title>
+<meta name="description" content="Concert Timer is an iPhone app for orchestra librarians and personnel managers: build the concert program, time each piece live, run a countdown intermission with a tuning note, and share a PDF of the actual timings. Free, no account, 11 languages.">
+<link rel="canonical" href="https://concerttimerapp.github.io/">
+<meta property="og:title" content="Concert Timer — timing app for orchestra librarians">
+<meta property="og:description" content="Build the program, time each piece live, share a PDF of the actual timings moments after the final bow. Free, on the App Store.">
+<meta property="og:image" content="https://concerttimerapp.github.io/img/03-timing.png">
+<meta property="og:url" content="https://concerttimerapp.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.png">
 <style>
-  :root { --red: #e30a14; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 0;
-    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #000; background: #fff; line-height: 1.5;
+  /* Concert Timer — International Typographic Style.
+     Black, white, one red. Helvetica, flush left, square corners.
+     Nothing decorative: every rule and every gap does a job. */
+
+  :root {
+    --ink: #000;
+    --red: #E30A14;       /* the app's red, the only colour on the page */
+    --paper: #fff;
+    --field: #f2f2f2;
+    --rule: #d8d8d8;
+    --gap: 24px;
   }
-  .bar { height: 8px; background: var(--red); }
-  main { max-width: 640px; margin: 0 auto; padding: 40px 24px 80px; }
-  h1 { font-weight: 800; font-size: 40px; letter-spacing: -1px; margin: 32px 0 4px; }
-  h2 { font-weight: 700; font-size: 20px; margin: 40px 0 8px; }
-  p, li { font-size: 17px; }
-  a { color: var(--red); }
-  .tag { color: var(--red); font-weight: 700; }
-  footer { margin-top: 56px; font-size: 14px; color: #666; }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .rule-top { height: 10px; background: var(--red); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gap); }
+
+  /* ---- the grid: 12 columns, everything flush left ---- */
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
+
+  /* ---- masthead ---- */
+  header { padding: 56px 0 40px; }
+  h1 {
+    font-size: clamp(44px, 9.2vw, 108px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .standfirst {
+    grid-column: 1 / 8;
+    margin: 28px 0 0;
+    font-size: clamp(19px, 2.2vw, 25px);
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+  }
+  .meta {
+    grid-column: 9 / 13;
+    margin: 32px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .meta b { color: var(--ink); font-weight: 700; }
+
+  .cta {
+    display: inline-block;
+    margin-top: 28px;
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    padding: 15px 26px;
+  }
+  .cta:hover { text-decoration: none; background: #000; }
+  .cta-note { font-size: 13px; color: #555; margin: 12px 0 0; letter-spacing: 0.02em; }
+
+  /* ---- rules that structure the page ---- */
+  .hr { border: 0; border-top: 1px solid var(--ink); margin: 0; }
+
+  section { padding: 56px 0; }
+  .kicker {
+    grid-column: 1 / 3;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-top: 5px;
+  }
+  .body { grid-column: 3 / 9; }
+  h2 {
+    font-size: clamp(26px, 3.4vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0 0 18px;
+  }
+  p { margin: 0 0 16px; max-width: 34em; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---- screenshots ---- */
+  .shots {
+    grid-column: 1 / 13;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+  }
+  .shot { background: var(--field); margin: 0; }
+  .shot img { width: 100%; }
+  .shot figcaption {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 12px 12px;
+    color: #555;
+  }
+
+  /* ---- numbered feature list ---- */
+  ol.features {
+    grid-column: 3 / 13;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 48px;
+  }
+  ol.features li {
+    break-inside: avoid;
+    border-top: 1px solid var(--ink);
+    padding: 14px 0 18px;
+    margin: 0;
+  }
+  ol.features .n {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    margin-bottom: 5px;
+  }
+  ol.features b { display: block; font-weight: 700; letter-spacing: -0.01em; }
+  ol.features .d { display: block; color: #444; font-size: 15.5px; line-height: 1.4; margin-top: 3px; }
+
+  /* ---- the PDF block ---- */
+  .pdf-shot { grid-column: 9 / 13; background: var(--field); }
+  .pdf-shot img { width: 100%; }
+
+  /* ---- languages ---- */
+  .langs {
+    grid-column: 3 / 13;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+  }
+  .langs li { padding-right: 18px; margin-right: 18px; border-right: 1px solid var(--rule); margin-bottom: 8px; }
+  .langs li:last-child { border-right: 0; }
+
+  /* ---- footer ---- */
+  footer { padding: 44px 0 64px; font-size: 14px; color: #555; }
+  footer .grid { row-gap: 20px; }
+  footer .col { grid-column: span 4; }
+  footer b { display: block; color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .colophon { grid-column: 1 / 13; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 13px; max-width: none; }
+
+  /* ---- narrow screens: one column, same rhythm ---- */
+  @media (max-width: 800px) {
+    :root { --gap: 18px; }
+    body { font-size: 16px; }
+    header { padding: 36px 0 28px; }
+    section { padding: 38px 0; }
+    .standfirst, .meta, .kicker, .body,
+    ol.features, .langs, .shots, .pdf-shot, footer .col { grid-column: 1 / 13; }
+    .meta { margin-top: 20px; }
+    .kicker { padding-top: 0; margin-bottom: -14px; }
+    ol.features { columns: 1; }
+    .shots { grid-template-columns: 1fr; }
+    .shots .shot:nth-child(n+3) { display: none; }
+    .pdf-shot { max-width: 380px; }
+  }
 </style>
 </head>
 <body>
-<div class="bar"></div>
-<main>
-  <h1>Concert&nbsp;Timer</h1>
-  <p class="tag">For orchestra librarians</p>
 
-  <p>Concert Timer is a timing tool for orchestra librarians and personnel
-  managers. Build the program, time each piece live, run a countdown
-  intermission with a tuning note at the end, record encores, and share a PDF
-  of the actual timings — scheduled start and end time included — moments after
-  the final bow.</p>
+<div class="rule-top"></div>
 
-  <h2>Support</h2>
-  <p>Questions, suggestions, or a bug to report? Please write to:</p>
-  <p><a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a></p>
-  <p>I read every message and reply personally.</p>
+<div class="wrap">
 
-  <h2>Privacy</h2>
-  <p>Concert Timer collects no data. Everything you enter stays on your device.
-  See the <a href="privacy.html">privacy policy</a>.</p>
+  <header>
+    <h1>Concert<br>Timer</h1>
+    <div class="grid">
+      <p class="standfirst">
+        A timing tool for orchestra librarians and personnel managers.
+        Build the program, time each piece as it is played, and share a PDF
+        of the actual timings moments after the final bow.
+      </p>
+      <p class="meta">
+        <b>Free</b> · no account · no tracking<br>
+        iPhone · iOS 26.5 or later<br>
+        <b>11 languages</b><br>
+        Made by a librarian
+      </p>
+    </div>
+    <a class="cta" href="https://apps.apple.com/app/id6779733292">Download on the App Store</a>
+    <p class="cta-note">Free, and it stays free.</p>
+  </header>
+
+  <hr class="hr">
+
+  <section>
+    <div class="grid">
+      <div class="shots">
+        <figure class="shot">
+          <img sizes="(max-width: 800px) 100vw, 336px"
+               src="img/02-program.png" srcset="img/02-program.png 660w, img/02-program@2x.png 1320w" alt="The program screen: pieces, intermission, conductor and soloists." width="660" height="1434">
+          <figcaption>01 — The program</figcaption>
+        </figure>
+        <figure class="shot">
+          <img sizes="(max-width: 800px) 100vw, 336px"
+               src="img/03-timing.png" srcset="img/03-timing.png 660w, img/03-timing@2x.png 1320w" alt="A piece being timed live, with a large running clock." width="660" height="1434">
+          <figcaption>02 — Timing, live</figcaption>
+        </figure>
+        <figure class="shot">
+          <img sizes="(max-width: 800px) 100vw, 336px"
+               src="img/04-intermission.png" srcset="img/04-intermission.png 660w, img/04-intermission@2x.png 1320w" alt="The intermission countdown, showing twenty minutes remaining." width="660" height="1434">
+          <figcaption>03 — Intermission</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <section>
+    <div class="grid">
+      <p class="kicker">What it does</p>
+      <div class="body">
+        <h2>Everything the evening asks of you, and nothing else.</h2>
+        <p>
+          Concert Timer was written backstage, for the person holding the
+          stopwatch. It does the small number of things that job actually
+          requires — and it does them in the dark, in a hurry, without asking
+          you to think about the app.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="grid">
+      <ol class="features">
+        <li>
+          <span class="n">01</span>
+          <b>Build a program in seconds</b>
+          <span class="d">Pieces, intermission, conductor and soloists. Drag to reorder; duplicate a program for the second night.</span>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <b>Time each piece live</b>
+          <span class="d">One large, legible clock. Turn the phone sideways and it fills the screen — readable from across the stage.</span>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <b>Countdown intermission</b>
+          <span class="d">Adjustable length, a warning before it ends, and a tuning A at zero. Choose your pitch, from Baroque (392, 415&nbsp;Hz) to modern (440–443&nbsp;Hz).</span>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <b>Encores, on the fly</b>
+          <span class="d">Add a piece the moment you see the soloist sit back down. Name it once you recognise what they are playing.</span>
+        </li>
+        <li>
+          <span class="n">05</span>
+          <b>A PDF, immediately</b>
+          <span class="d">The complete timing sheet — scheduled start, every duration, the total, and the time the concert actually ended.</span>
+        </li>
+        <li>
+          <span class="n">06</span>
+          <b>Nothing leaves your phone</b>
+          <span class="d">No account, no sign-in, no analytics, no cloud. The concerts are yours and they stay on the device.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <section>
+    <div class="grid">
+      <p class="kicker">The timing sheet</p>
+      <div class="body">
+        <h2>Sent before the audience has left the hall.</h2>
+        <p>
+          The personnel manager needs the timings tonight; the archivist needs
+          them tomorrow. When the concert ends the PDF is already written —
+          dated, titled, and set in the same quiet typography as the app.
+        </p>
+        <p>Share it by mail, message or AirDrop without leaving the screen.</p>
+      </div>
+      <div class="pdf-shot">
+        <img sizes="(max-width: 800px) 380px, 336px" loading="lazy"
+             src="img/07-pdf.png" srcset="img/07-pdf.png 660w, img/07-pdf@2x.png 1320w" alt="The exported PDF timing sheet, showing each piece with its duration and the concert total." width="660" height="1434">
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <section>
+    <div class="grid">
+      <p class="kicker">Languages</p>
+      <div class="body" style="margin-bottom:22px">
+        <h2>Eleven languages, checked by librarians.</h2>
+        <p>
+          The terms were reviewed by colleagues who do this work in their own
+          language — <i>Stimmton</i>, <i>viritysääni</i>, <i>nota di accordatura</i>.
+          The vocabulary of the profession, not of a dictionary.
+        </p>
+      </div>
+      <ul class="langs">
+        <li>English</li><li>Français</li><li>Deutsch</li><li>Español</li>
+        <li>Italiano</li><li>Nederlands</li><li>Svenska</li><li>Dansk</li>
+        <li>Norsk</li><li>Suomi</li><li>日本語</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <section>
+    <div class="grid">
+      <p class="kicker">Support</p>
+      <div class="body">
+        <h2>Written by one person, who answers.</h2>
+        <p>
+          Questions, suggestions, or something that went wrong on a concert
+          night? Write to <a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a>.
+          I read every message and reply personally.
+        </p>
+        <p>
+          Concert Timer collects no data whatsoever. Everything you enter stays
+          on your device — see the <a href="privacy.html">privacy policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
 
   <footer>
-    Concert Timer is available in 11 languages. Made by a librarian, for librarians.
+    <div class="grid">
+      <div class="col">
+        <b>Get it</b>
+        <a href="https://apps.apple.com/app/id6779733292">Download on the App&nbsp;Store</a><br>
+        Free · iPhone · iOS 26.5+
+      </div>
+      <div class="col">
+        <b>Contact</b>
+        <a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a>
+      </div>
+      <div class="col">
+        <b>Privacy</b>
+        <a href="privacy.html">No data is collected</a>
+      </div>
+      <p class="colophon">
+        Concert Timer — made by an orchestra librarian, for orchestra librarians.<br>
+        © 2026 Michel Léonard
+      </p>
+    </div>
   </footer>
-</main>
+
+</div>
+
 </body>
 </html>
