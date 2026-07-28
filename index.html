@@ -58,11 +58,17 @@
 
   /* ---- masthead ---- */
   header { padding: 56px 0 40px; }
+  /* The wordmark is San Francisco at weight .black — the same face and weight
+     the app sets its own CONCERT TIMER title in. Apple devices resolve SF from
+     -apple-system; everything else falls back to Helvetica rather than to
+     Segoe, which is why system-ui is deliberately not first. */
   h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: clamp(44px, 9.2vw, 108px);
     line-height: 0.92;
-    letter-spacing: -0.035em;
-    font-weight: 700;
+    letter-spacing: -0.025em;
+    font-weight: 900;
     margin: 0;
     text-transform: uppercase;
   }

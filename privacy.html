@@ -36,11 +36,14 @@
   .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
 
   header { padding: 56px 0 36px; }
+  /* Same wordmark treatment as the front page: San Francisco, weight .black. */
   h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: clamp(38px, 6.4vw, 72px);
     line-height: 0.95;
-    letter-spacing: -0.03em;
-    font-weight: 700;
+    letter-spacing: -0.025em;
+    font-weight: 900;
     margin: 0;
     text-transform: uppercase;
   }
