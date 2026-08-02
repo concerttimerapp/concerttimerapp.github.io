@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concert Timer — how to use it</title>
+<meta name="description" content="How to use Concert Timer: build a concert program, time each piece live, run a countdown intermission with a tuning A, record an encore, recover from an early stop, and share the timing sheet as a PDF.">
+<link rel="canonical" href="https://concerttimer.com/guide.html">
+<meta property="og:title" content="Concert Timer — how to use it">
+<meta property="og:description" content="Building the program, timing the evening, recovering from a mistake, and what to do with the PDF afterwards.">
+<meta property="og:image" content="https://concerttimer.com/img/og-image.png">
+<meta property="og:url" content="https://concerttimer.com/guide.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Concert Timer">
+<link rel="icon" href="img/icon.png">
+<style>
+  /* Same system as the front page: black, white, one red, Helvetica,
+     flush left, square corners. The wordmark alone is San Francisco Black,
+     as in the app. */
+
+  :root {
+    --ink: #000;
+    --red: #E30A14;
+    --paper: #fff;
+    --field: #f2f2f2;
+    --rule: #d8d8d8;
+    --gap: 24px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: var(--red); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .rule-top { height: 10px; background: var(--red); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 var(--gap); }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); }
+  .hr { border: 0; border-top: 1px solid var(--ink); margin: 0; }
+
+  /* ---- masthead ---- */
+  header { padding: 44px 0 34px; }
+  .back {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; display: inline-block; margin-bottom: 26px;
+  }
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(40px, 8vw, 92px);
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .standfirst {
+    grid-column: 1 / 8;
+    margin: 24px 0 0;
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.32;
+    letter-spacing: -0.012em;
+  }
+
+  /* ---- contents ---- */
+  nav.toc { padding: 26px 0 30px; }
+  nav.toc ol { grid-column: 3 / 13; list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 48px; }
+  nav.toc li { break-inside: avoid; border-top: 1px solid var(--rule); padding: 9px 0; }
+  nav.toc a { color: var(--ink); font-size: 16px; }
+  nav.toc a:hover { color: var(--red); text-decoration: none; }
+  nav.toc .n { color: var(--red); font-weight: 700; font-size: 12px; letter-spacing: 0.08em; margin-right: 10px; }
+  .toc-head { grid-column: 1 / 3; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding-top: 12px; }
+
+  /* ---- sections ---- */
+  section { padding: 52px 0; }
+  .kicker {
+    grid-column: 1 / 3;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; padding-top: 6px; color: var(--red);
+  }
+  .body { grid-column: 3 / 9; }
+  .body.wide { grid-column: 3 / 13; }
+  h2 {
+    font-size: clamp(25px, 3.2vw, 34px);
+    line-height: 1.1; letter-spacing: -0.025em; font-weight: 700;
+    margin: 0 0 20px;
+  }
+  h3 {
+    font-size: 18px; letter-spacing: -0.01em; font-weight: 700;
+    margin: 26px 0 6px;
+  }
+  p { margin: 0 0 14px; max-width: 34em; }
+  p:last-child { margin-bottom: 0; }
+  .lead { font-size: 19px; line-height: 1.35; letter-spacing: -0.01em; }
+
+  /* a gesture, called out inline */
+  .g { font-weight: 700; }
+  .note {
+    border-left: 3px solid var(--red);
+    padding: 2px 0 2px 16px;
+    margin: 20px 0;
+    max-width: 34em;
+  }
+  .note p { margin: 0; }
+
+  /* ---- figures ---- */
+  .shot { grid-column: 10 / 13; background: var(--field); margin: 0; align-self: start; }
+  .shot img { width: 100%; }
+  .shot figcaption {
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 9px 11px 11px; color: #555;
+  }
+  .shot a { color: inherit; display: block; }
+  .shot a:hover { text-decoration: none; }
+  .shot a:hover figcaption { color: var(--red); }
+
+  /* ---- settings + reference tables ---- */
+  table { grid-column: 3 / 13; border-collapse: collapse; width: 100%; font-size: 16px; margin-top: 6px; }
+  th, td { text-align: left; padding: 11px 14px 11px 0; border-top: 1px solid var(--rule); vertical-align: top; }
+  thead th { border-top: 1px solid var(--ink); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  td.k { font-weight: 700; width: 32%; }
+  td.v { color: #444; }
+
+  footer { padding: 40px 0 64px; font-size: 14px; color: #555; border-top: 1px solid var(--rule); margin-top: 20px; }
+  footer .grid { row-gap: 18px; }
+  footer .col { grid-column: span 4; }
+  footer b { display: block; color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+
+  @media (max-width: 800px) {
+    :root { --gap: 18px; }
+    body { font-size: 16px; }
+    header { padding: 30px 0 22px; }
+    section { padding: 34px 0; }
+    .standfirst, .kicker, .body, .body.wide, .shot,
+    nav.toc ol, .toc-head, table, footer .col { grid-column: 1 / 13; }
+    .kicker { padding-top: 0; margin-bottom: -12px; }
+    nav.toc ol { columns: 1; }
+    .toc-head { padding-top: 0; margin-bottom: -14px; }
+    .shot { max-width: 320px; margin-top: 24px; }
+    td.k { width: 40%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rule-top"></div>
+<div class="wrap">
+
+  <header>
+    <a class="back" href="index.html">← Concert Timer</a>
+    <h1>How to<br>use it</h1>
+    <div class="grid">
+      <p class="standfirst">
+        Concert Timer is built to be used in the dark, in a hurry, with one
+        hand. Most of it is obvious. This page is for the parts that aren't —
+        and for the evening as a whole, from building the program to sending
+        the timing sheet.
+      </p>
+    </div>
+  </header>
+
+  <hr class="hr">
+
+  <nav class="toc">
+    <div class="grid">
+      <p class="toc-head">Contents</p>
+      <ol>
+        <li><a href="#before"><span class="n">01</span>Before the concert</a></li>
+        <li><a href="#during"><span class="n">02</span>During the concert</a></li>
+        <li><a href="#wrong"><span class="n">03</span>When something goes wrong</a></li>
+        <li><a href="#after"><span class="n">04</span>Afterwards</a></li>
+        <li><a href="#settings"><span class="n">05</span>Settings</a></li>
+        <li><a href="#gestures"><span class="n">06</span>Every hidden gesture</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <hr class="hr">
+
+  <!-- 01 ------------------------------------------------------------ -->
+  <section id="before">
+    <div class="grid">
+      <p class="kicker">01</p>
+      <div class="body">
+        <h2>Before the concert</h2>
+        <p class="lead">
+          A concert is a name, a date, a hall, and a list of works. Nothing is
+          required except the works.
+        </p>
+
+        <h3>Building the program</h3>
+        <p>
+          Tap <b>New concert</b> and you land straight on the program page. Tap
+          <b>Add piece</b>, type a title, press return — the field stays open, so
+          you can enter a whole program without lifting your hands. An empty
+          return closes it.
+        </p>
+        <p>
+          <b>Add intermission</b> puts the interval wherever you are in the list.
+          The other links — concert name, conductor, soloist, venue — each
+          disappear once used, so the menu shrinks as the program fills in.
+        </p>
+
+        <h3>Fixing what you typed</h3>
+        <p>
+          <span class="g">Double-tap</span> anything in the header to edit it:
+          the concert name, the venue, a conductor, a soloist. Same for a piece
+          title in the list. <span class="g">Tap the red date</span> to open the
+          calendar and the time.
+        </p>
+        <p>
+          <span class="g">Long-press and drag</span> a piece to reorder it — it
+          crosses the intermission freely. <span class="g">Swipe left</span> to
+          delete one.
+        </p>
+
+        <h3>The second night</h3>
+        <p>
+          On the concert list, <span class="g">long-press a concert</span> to
+          <b>Duplicate</b> it: the same program, timings cleared, dated the
+          following day. Two performances of one program cost you one entry.
+        </p>
+
+        <div class="note">
+          <p>
+            <b>The PDF is also a program page.</b> Export a concert you haven't
+            timed yet and the sheet ends after the last work — no total, nothing
+            to cross out. A clean, printed program for the musicians' folders,
+            set in the same typography as the app. Afterwards, the same sheet
+            comes back with every duration on it.
+          </p>
+        </div>
+      </div>
+
+      <figure class="shot">
+        <img sizes="(max-width: 800px) 320px, 240px"
+             src="img/02-program.png" srcset="img/02-program.png 660w, img/02-program@2x.png 1320w"
+             alt="The program screen, showing pieces, an intermission, conductor and soloist." width="660" height="1434">
+        <figcaption>The program</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 02 ------------------------------------------------------------ -->
+  <section id="during">
+    <div class="grid">
+      <p class="kicker">02</p>
+      <div class="body">
+        <h2>During the concert</h2>
+        <p class="lead">
+          One piece is current at a time. Start it when the music starts, stop
+          it when the applause does.
+        </p>
+
+        <h3>Timing a piece</h3>
+        <p>
+          <b>Start concert</b> opens the timing screen. Red buttons are the
+          routine ones — start, stop. Black buttons are the ones you shouldn't
+          normally need — pause, reset. Stopping a piece records its duration
+          and moves to the next.
+        </p>
+
+        <h3>Turn the phone</h3>
+        <p>
+          <span class="g">Rotate to landscape</span> and the timer fills the
+          screen, chrome and all removed. It is meant to be legible from across
+          a stage, at a glance, without your reading glasses.
+        </p>
+
+        <h3>The intermission</h3>
+        <p>
+          The interval runs as a countdown rather than a stopwatch, with a
+          warning before the end and a tuning A at zero. It counts on the
+          wall clock, so locking the phone or leaving the app loses nothing.
+        </p>
+
+        <h3>An encore</h3>
+        <p>
+          <b>Add piece</b> is on the timing screen too. When you see the soloist
+          settle back onto the bench, add a row — name it <i>???</i> if you must
+          and rename it once you recognise what they're playing.
+        </p>
+      </div>
+
+      <figure class="shot">
+        <img sizes="(max-width: 800px) 320px, 240px"
+             src="img/03-timing.png" srcset="img/03-timing.png 660w, img/03-timing@2x.png 1320w"
+             alt="A piece being timed, with a large running clock and start, stop and reset buttons." width="660" height="1434">
+        <figcaption>Timing, live</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 03 ------------------------------------------------------------ -->
+  <section id="wrong">
+    <div class="grid">
+      <p class="kicker">03</p>
+      <div class="body">
+        <h2>When something goes wrong</h2>
+
+        <h3>You stopped a piece too early</h3>
+        <p>
+          A pause between movements can sound exactly like an ending. Tap the
+          <span class="g">black back button</span> and the piece reopens with the
+          timer still running — the time it spent stopped is added back, so the
+          recorded duration is exactly what it would have been.
+          <b>Not a single second is lost.</b> It's there until you start the next
+          piece, by which point you know the last one really did end.
+        </p>
+
+        <h3>You need to adjust a duration</h3>
+        <p>
+          <span class="g">Double-tap a duration</span> to change it. The keypad
+          works like a stopwatch: type the digits and they fill from the right,
+          no colon to enter. 1 4 3 0 is fourteen minutes and thirty seconds. The
+          first digit you type replaces the old value; delete to edit it instead.
+        </p>
+
+        <h3>You left the app, or it quit</h3>
+        <p>
+          Nothing is lost. A running timer is anchored to the clock, not to the
+          app, so leaving the screen, locking the phone, taking a call or even
+          force-quitting doesn't cost you a second. Reopen the concert and it
+          picks up exactly where it should be.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 04 ------------------------------------------------------------ -->
+  <section id="after">
+    <div class="grid">
+      <p class="kicker">04</p>
+      <div class="body">
+        <h2>Afterwards</h2>
+        <p class="lead">
+          The personnel manager wants the timings tonight. The archives want
+          them tomorrow.
+        </p>
+
+        <h3>The timing sheet</h3>
+        <p>
+          The share button on the program or timing screen produces a dated PDF:
+          every work with its duration, the intermission, the total, and the
+          time the concert actually ended against the time it was scheduled to
+          begin. Send it by mail, message or AirDrop without leaving the app.
+        </p>
+        <p>
+          <a href="gala-concert-timing-sheet.pdf" target="_blank" rel="noopener">See
+          a real one</a> — exported from the app, not redrawn for this page.
+        </p>
+
+        <h3>Sending a program to a colleague</h3>
+        <p>
+          On the concert list, <span class="g">long-press a concert</span> and
+          choose <b>Share concert</b>. That sends the program itself — not a PDF
+          — and a colleague who also has Concert Timer can open it and have the
+          whole evening ready to time.
+        </p>
+      </div>
+
+      <figure class="shot">
+        <a href="gala-concert-timing-sheet.pdf" target="_blank" rel="noopener">
+          <img sizes="(max-width: 800px) 320px, 240px"
+               src="img/07-pdf.png" srcset="img/07-pdf.png 660w, img/07-pdf@2x.png 1320w"
+               alt="The exported PDF timing sheet with each piece, its duration, and the total." width="660" height="1434">
+          <figcaption>The timing sheet — open the PDF ↗</figcaption>
+        </a>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 05 ------------------------------------------------------------ -->
+  <section id="settings">
+    <div class="grid">
+      <p class="kicker">05</p>
+      <div class="body wide">
+        <h2>Settings</h2>
+        <p>
+          The gear on the first screen. Four things, and they stay as you set
+          them.
+        </p>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:24px">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="k">Intermission length</td>
+            <td class="v">Five to sixty minutes; twenty by default. This is what
+              the countdown starts from.</td>
+          </tr>
+          <tr>
+            <td class="k">Warning before end</td>
+            <td class="v">A discreet signal that the interval is nearly over —
+              five minutes by default. It can't exceed the intermission itself,
+              and shortens automatically if you shorten the interval.</td>
+          </tr>
+          <tr>
+            <td class="k">A at the end</td>
+            <td class="v">A tuning note when the countdown reaches zero, so the
+              orchestra can tune without waiting for anyone. On by default; turn
+              it off and the interval simply ends.</td>
+          </tr>
+          <tr>
+            <td class="k">Pitch</td>
+            <td class="v">392, 415, 440, 441, 442 or 443&nbsp;Hz — Baroque
+              through modern. 442 by default. It plays through the speaker even
+              if the phone is on silent.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid" style="margin-top:40px">
+      <div class="body">
+        <h3>Language</h3>
+        <p>
+          Concert Timer speaks eleven languages and has no language setting of
+          its own — it follows your iPhone, so it is already in your language
+          the first time you open it.
+        </p>
+        <p>
+          To read it in a different language from the rest of your phone, open
+          the iPhone's <b>Settings</b>, find <b>Concert Timer</b> (under
+          <b>Apps</b> on recent versions of iOS), and choose <b>Language</b>.
+          Useful on tour, when the programme is in one language and your
+          colleagues work in another.
+        </p>
+        <p>
+          English, French, German, Spanish, Italian, Dutch, Swedish, Danish,
+          Norwegian, Finnish and Japanese. If a term reads wrong in your
+          language, <a href="mailto:michelleonard@mac.com">write to me</a> —
+          corrections from people who do this work are always welcome.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 06 ------------------------------------------------------------ -->
+  <section id="gestures">
+    <div class="grid">
+      <p class="kicker">06</p>
+      <div class="body wide">
+        <h2>Every hidden gesture</h2>
+        <p>
+          The app stays uncluttered by keeping these out of sight. Here they all
+          are in one place.
+        </p>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:24px">
+      <table>
+        <thead>
+          <tr><th>Gesture</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="k">Long-press a concert</td><td class="v">Duplicate it, or share the program with a colleague</td></tr>
+          <tr><td class="k">Swipe left on a concert</td><td class="v">Delete it, after a confirmation</td></tr>
+          <tr><td class="k">Double-tap a name</td><td class="v">Edit the concert name, venue, conductor or soloist</td></tr>
+          <tr><td class="k">Double-tap a piece</td><td class="v">Rename it</td></tr>
+          <tr><td class="k">Double-tap a duration</td><td class="v">Correct a timing, stopwatch-style</td></tr>
+          <tr><td class="k">Tap the red date</td><td class="v">Open the calendar and the start time</td></tr>
+          <tr><td class="k">Long-press and drag a piece</td><td class="v">Reorder the program, across the intermission</td></tr>
+          <tr><td class="k">Swipe left on a piece</td><td class="v">Remove it from the program</td></tr>
+          <tr><td class="k">Rotate the phone</td><td class="v">Fullscreen timer, readable across the stage</td></tr>
+          <tr><td class="k">Black back button, after a stop</td><td class="v">Reopen the piece you just stopped, losing nothing</td></tr>
+          <tr><td class="k">Open a shared program</td><td class="v">A colleague's <i>.concert</i> file opens straight into the app</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <footer>
+    <div class="grid">
+      <div class="col">
+        <b>Get it</b>
+        <a href="https://apps.apple.com/app/id6779733292">Download on the App&nbsp;Store</a><br>
+        Free · iPhone
+      </div>
+      <div class="col">
+        <b>Questions</b>
+        <a href="mailto:michelleonard@mac.com">michelleonard@mac.com</a><br>
+        I reply personally.
+      </div>
+      <div class="col">
+        <b>Back</b>
+        <a href="index.html">concerttimer.com</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
