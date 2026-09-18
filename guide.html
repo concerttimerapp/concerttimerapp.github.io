@@ -175,10 +175,11 @@
       <ol>
         <li><a href="#before"><span class="n">01</span>Before the concert</a></li>
         <li><a href="#during"><span class="n">02</span>During the concert</a></li>
-        <li><a href="#wrong"><span class="n">03</span>When something goes wrong</a></li>
-        <li><a href="#after"><span class="n">04</span>Afterwards</a></li>
-        <li><a href="#settings"><span class="n">05</span>Settings</a></li>
-        <li><a href="#gestures"><span class="n">06</span>Every hidden gesture</a></li>
+        <li><a href="#watch"><span class="n">03</span>From your Apple Watch</a></li>
+        <li><a href="#wrong"><span class="n">04</span>When something goes wrong</a></li>
+        <li><a href="#after"><span class="n">05</span>Afterwards</a></li>
+        <li><a href="#settings"><span class="n">06</span>Settings</a></li>
+        <li><a href="#gestures"><span class="n">07</span>Every hidden gesture</a></li>
       </ol>
     </div>
   </nav>
@@ -304,20 +305,86 @@
   <hr class="hr">
 
   <!-- 03 ------------------------------------------------------------ -->
-  <section id="wrong">
+  <section id="watch">
     <div class="grid">
       <p class="kicker">03</p>
+      <div class="body">
+        <h2>From your Apple Watch</h2>
+        <p class="lead">
+          The iPhone stays in your pocket or on the stand. Your wrist does the
+          timing.
+        </p>
+
+        <h3>The same buttons, on the wrist</h3>
+        <p>
+          Open a concert on the iPhone and the watch follows: the current piece,
+          its running time, and the same buttons as the phone, in the same
+          colours. Nothing is set up on the watch itself. If Concert Timer isn't
+          on your watch yet, open the Watch app on the iPhone and install it
+          from there.
+        </p>
+
+        <h3>A press counts when you make it</h3>
+        <p>
+          Each press carries the instant your finger touched the button. If the
+          watch needs a moment to reach the iPhone — just after you raise your
+          wrist, for example — the phone still stops the piece at that instant.
+          <b>A slow connection never adds a second.</b> The press is silent, by
+          design: you press Stop and the timer stops.
+        </p>
+
+        <h3>On your watch face</h3>
+        <p>
+          Add Concert Timer to your watch face and the current piece and its
+          time are always one glance away, updating by themselves the moment a
+          concert opens on the iPhone. With no concert open it shows a red
+          Concert Timer band; <span class="g">tap it</span> to open the remote.
+          With your wrist down the timer keeps counting on the dimmed screen.
+        </p>
+
+        <h3>The iPhone stays in charge</h3>
+        <p>
+          The watch keeps no concert and records no timing — everything lives on
+          the iPhone, exactly as before. A flat watch battery, or a watch left in
+          the hotel room, costs you nothing.
+        </p>
+
+        <h3>After a watchOS update</h3>
+        <p>
+          If Concert Timer has disappeared from your watch face, open the app on
+          the watch once, or choose it again when editing the face.
+        </p>
+      </div>
+
+      <figure class="shot">
+        <img src="img/08-watch-face.png"
+             alt="An Apple Watch face with the red Concert Timer band in the middle." width="416" height="496">
+        <figcaption>On the watch face</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <hr class="hr">
+
+  <!-- 04 ------------------------------------------------------------ -->
+  <section id="wrong">
+    <div class="grid">
+      <p class="kicker">04</p>
       <div class="body">
         <h2>When something goes wrong</h2>
 
         <h3>You stopped a piece too early</h3>
         <p>
           A pause between movements can sound exactly like an ending. Tap the
-          <span class="g">black back button</span> and the piece reopens with the
+          <span class="g">back arrow</span> and the piece reopens with the
           timer still running — the time it spent stopped is added back, so the
           recorded duration is exactly what it would have been.
-          <b>Not a single second is lost.</b> It's there until you start the next
-          piece, by which point you know the last one really did end.
+          <b>Not a single second is lost.</b>
+        </p>
+        <p>
+          Already started the next piece? Pause it, then tap the back arrow: the
+          seconds it ran go back to the piece they belonged to. The arrow goes
+          back two steps, so even Stop, Start, Stop can be undone.
         </p>
 
         <h3>You need to adjust a duration</h3>
@@ -341,10 +408,10 @@
 
   <hr class="hr">
 
-  <!-- 04 ------------------------------------------------------------ -->
+  <!-- 05 ------------------------------------------------------------ -->
   <section id="after">
     <div class="grid">
-      <p class="kicker">04</p>
+      <p class="kicker">05</p>
       <div class="body">
         <h2>Afterwards</h2>
         <p class="lead">
@@ -386,10 +453,10 @@
 
   <hr class="hr">
 
-  <!-- 05 ------------------------------------------------------------ -->
+  <!-- 06 ------------------------------------------------------------ -->
   <section id="settings">
     <div class="grid">
-      <p class="kicker">05</p>
+      <p class="kicker">06</p>
       <div class="body wide">
         <h2>Settings</h2>
         <p>
@@ -458,10 +525,10 @@
 
   <hr class="hr">
 
-  <!-- 06 ------------------------------------------------------------ -->
+  <!-- 07 ------------------------------------------------------------ -->
   <section id="gestures">
     <div class="grid">
-      <p class="kicker">06</p>
+      <p class="kicker">07</p>
       <div class="body wide">
         <h2>Every hidden gesture</h2>
         <p>
@@ -485,7 +552,8 @@
           <tr><td class="k">Long-press and drag a piece</td><td class="v">Reorder the program, across the intermission</td></tr>
           <tr><td class="k">Swipe left on a piece</td><td class="v">Remove it from the program</td></tr>
           <tr><td class="k">Rotate the phone</td><td class="v">Fullscreen timer, readable across the stage</td></tr>
-          <tr><td class="k">Black back button, after a stop</td><td class="v">Reopen the piece you just stopped, losing nothing</td></tr>
+          <tr><td class="k">Back arrow, after a stop</td><td class="v">Reopen the piece you just stopped, losing nothing — up to two steps back</td></tr>
+          <tr><td class="k">Tap Concert Timer on the watch face</td><td class="v">Open the remote on your wrist</td></tr>
           <tr><td class="k">Open a shared program</td><td class="v">A colleague's <i>.concert</i> file opens straight into the app</td></tr>
         </tbody>
       </table>
@@ -499,7 +567,7 @@
       <div class="col">
         <b>Get it</b>
         <a href="https://apps.apple.com/app/id6779733292">Download on the App&nbsp;Store</a><br>
-        Free · iPhone
+        Free · iPhone · Apple Watch
       </div>
       <div class="col">
         <b>Questions</b>
